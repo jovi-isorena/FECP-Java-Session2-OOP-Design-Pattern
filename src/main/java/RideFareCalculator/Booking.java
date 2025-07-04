@@ -31,6 +31,8 @@ public class Booking {
         return this.fareType;
     }
 
+    public Surcharge getSurcharge() { return surcharge; }
+
     public double getDistanceCost(){
         return this.distanceRate + this.distance;
     }
