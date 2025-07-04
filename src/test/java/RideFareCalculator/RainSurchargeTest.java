@@ -17,7 +17,7 @@ class RainSurchargeTest {
     @Test
     void returnsCorrectFareCalculation() {
         double actual = rainSurcharge.computeSurchargeAmount(50.0);
-        assertEquals(60.0, actual);
+        assertEquals(10.0, actual);
     }
 
     @Test

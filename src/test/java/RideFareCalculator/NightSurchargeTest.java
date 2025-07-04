@@ -18,7 +18,7 @@ class NightSurchargeTest {
     @Test
     void returnsCorrectFareCalculation(){
         double actual = nightSurcharge.computeSurchargeAmount(50);
-        assertEquals(57.50, actual);
+        assertEquals(7.5, actual);
     }
 
     @Test

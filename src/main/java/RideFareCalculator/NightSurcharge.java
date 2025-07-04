@@ -10,6 +10,6 @@ public class NightSurcharge implements Surcharge{
     @Override
     public double computeSurchargeAmount(double baseFare){
         if(baseFare < 0) throw  new IllegalArgumentException("Value cannot be less than 0.");
-        return (baseFare * 0.15) + baseFare;
+        return (baseFare * 0.15);
     }
 }
