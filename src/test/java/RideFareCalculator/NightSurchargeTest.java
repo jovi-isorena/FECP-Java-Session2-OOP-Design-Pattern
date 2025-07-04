@@ -11,6 +11,7 @@ class NightSurchargeTest {
 
     @BeforeEach
     void setup(){
+
         nightSurcharge = new NightSurcharge();
     }
 
@@ -20,4 +21,14 @@ class NightSurchargeTest {
         assertEquals(57.50, actual);
     }
 
+    @Test
+    void checkCorrectSurchargeType(){
+        String actual = nightSurcharge.getName();
+        assertEquals("Night", actual);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenInvalidAmount() {
+        assertThrows(IllegalArgumentException.class, () -> nightSurcharge.computeSurchargeAmount(-69));
+    }
 }
