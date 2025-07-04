@@ -48,7 +48,6 @@ public class Main {
     public static void bookRide(ArrayList<Booking> bookings){
         System.out.print("Enter Ride Type (standard/premium): ");
         String rideType = sc.nextLine();
-        // TODO: add while loop here for ride type
         System.out.print("Enter Fare Type (normal/night/peak/rain): ");
         String fareType = sc.nextLine();
         System.out.print("Enter Distance (km): ");
@@ -91,10 +90,10 @@ public class Main {
             sc.nextLine();
         }else{
             System.out.printf("Fare Type: %s\n", booking.getFareType());
-            System.out.printf("Base fare: \n" ); //TODO
+            System.out.printf("Base fare: %.2f\n", booking.getBaseFare() );
             System.out.printf("Distance cost: %.2f\n", booking.getDistanceCost());
             System.out.printf("Duration cost: %.2f\n", booking.getDurationCost());
-            System.out.printf("Surcharge (name): 0.00\n"); // TODO
+            System.out.printf("Surcharge (%s): %.2f\n", booking.getSurcharge().getName(), booking.getSurcharge().computeSurchargeAmount(booking.getBaseFare()));
             System.out.printf("Total Fare: %.2f\n", booking.getTotalFare());
             System.out.println("\nPress Enter to continue.");
             sc.nextLine();
@@ -107,17 +106,18 @@ public class Main {
         Booking booking = searchBooking(bookings, refNo);
         if(booking == null) {
             System.out.println("Booking not found. Press Enter to continue.");
-            sc.nextLine();
+//            sc.nextLine();
         }else{
             System.out.println("--- Receipt ---");
             System.out.printf("Ref #: %s\n", booking.getBookingId());
-            System.out.printf("Ride Type: %s\n", booking.getFareType()); // TODO
+            System.out.printf("Ride Type: %s\n", booking.getVehicleType());
             System.out.printf("Distance: %s km\n", booking.getDistance());
             System.out.printf("Duration: %s mins\n", booking.getDurationRate());
             System.out.printf("Total Fare: %s\n", booking.getTotalFare());
             System.out.println("\nPress Enter to continue.");
-            sc.nextLine();
+//            sc.nextLine();
         }
+        sc.nextLine();
     }
     public static Booking searchBooking(ArrayList<Booking> bookings, String id){
         return bookings.stream().filter(b -> b.getBookingId().equals(id) ).findFirst().orElse(null);
