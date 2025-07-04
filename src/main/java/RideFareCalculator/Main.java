@@ -39,7 +39,7 @@ public class Main {
     public static void displayMenu(){
         System.out.println("=== Ride Booking System ===");
         System.out.println("1. Book a Ride");
-        System.out.println("2. Book a Ride");
+        System.out.println("2. View All Booking");
         System.out.println("3. Calculate Fare");
         System.out.println("4. View Receipt");
         System.out.println("5. Exit");
@@ -47,44 +47,57 @@ public class Main {
     }
     public static void bookRide(ArrayList<Booking> bookings){
         System.out.print("Enter Ride Type (standard/premium): ");
-        sc.nextLine();
+        String rideType = sc.nextLine();
+        // TODO: add while loop here for ride type
+        System.out.print("Enter Fare Type (normal/night/peak/rain): ");
+        String fareType = sc.nextLine();
         System.out.print("Enter Distance (km): ");
-        sc.nextLine();
+        double distance = Double.parseDouble(sc.nextLine());
         System.out.print("Enter Duration (mins): ");
-        sc.nextLine();
+        double duration = Double.parseDouble(sc.nextLine());
         String newId = generateId();
         // use bookingFactory here
-        // if(BookingFactory.getBooking())
+        Booking booking;
+        try{
+          booking = BookingFactory.createBooking(newId, rideType, distance, duration, fareType);
+          bookings.add(booking);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            booking = null;
 
-
-        System.out.println("Ride booked successfully!");
-        System.out.println("Booking failed.");
+        }
+        if(booking != null){
+            System.out.println("Ride booked successfully!");
+        }else{
+            System.out.println("Booking failed.");
+        }
     }
     public static void viewAll(ArrayList<Booking> bookings){
         System.out.println("--- Bookings ---");
         for(Booking booking : bookings){
-            System.out.println(booking.toString());
+            System.out.printf("Ref#: %s\n", booking.getBookingId());
+            System.out.printf("Ride Type: %s\n", booking.getFareType());
+            System.out.printf("Total Fare: %.2f\n\n", booking.getTotalFare());
         }
-        System.out.println("\nPress a key to continue.");
-        sc.next();
+        System.out.println("Press Enter to continue.");
+        sc.nextLine();
     }
     public static void calculateFare(ArrayList<Booking> bookings){
         System.out.print("Enter Ride Reference No.: ");
         String refNo = sc.nextLine();
         Booking booking = searchBooking(bookings, refNo);
         if(booking == null) {
-            System.out.println("Booking not found. Press a key to continue.");
-            sc.next();
+            System.out.println("Booking not found. Press Enter to continue.");
+            sc.nextLine();
         }else{
-            System.out.println("Fare Type (normal/night): ");
-            System.out.println("Base fare: ");
-            System.out.println("Distance cost: ");
-            System.out.println("Duration cost: ");
-            System.out.println("Surcharge (name): ");
-            System.out.println("Distance cost: ");
-            System.out.println("Total Fare: ");
-            System.out.println("\nPress a key to continue.");
-            sc.next();
+            System.out.printf("Fare Type: %s\n", booking.getFareType());
+            System.out.printf("Base fare: \n" ); //TODO
+            System.out.printf("Distance cost: %.2f\n", booking.getDistanceCost());
+            System.out.printf("Duration cost: %.2f\n", booking.getDurationCost());
+            System.out.printf("Surcharge (name): 0.00\n"); // TODO
+            System.out.printf("Total Fare: %.2f\n", booking.getTotalFare());
+            System.out.println("\nPress Enter to continue.");
+            sc.nextLine();
         }
     }
 
@@ -93,16 +106,17 @@ public class Main {
         String refNo = sc.nextLine();
         Booking booking = searchBooking(bookings, refNo);
         if(booking == null) {
-            System.out.println("Booking not found. Press a key to continue.");
-            sc.next();
+            System.out.println("Booking not found. Press Enter to continue.");
+            sc.nextLine();
         }else{
             System.out.println("--- Receipt ---");
-            System.out.printf("Ride Type: %s\n", booking.getFareType());
+            System.out.printf("Ref #: %s\n", booking.getBookingId());
+            System.out.printf("Ride Type: %s\n", booking.getFareType()); // TODO
             System.out.printf("Distance: %s km\n", booking.getDistance());
             System.out.printf("Duration: %s mins\n", booking.getDurationRate());
             System.out.printf("Total Fare: %s\n", booking.getTotalFare());
-            System.out.println("\nPress a key to continue.");
-            sc.next();
+            System.out.println("\nPress Enter to continue.");
+            sc.nextLine();
         }
     }
     public static Booking searchBooking(ArrayList<Booking> bookings, String id){
