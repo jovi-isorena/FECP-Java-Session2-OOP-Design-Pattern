@@ -4,6 +4,8 @@ public class Booking {
     private String bookingId;
     private String vehicleType;
     private double baseFare; // base on vehicle type
+
+
     private double distance;
     private double durationMins;
     private double distanceRate; // base on vehicle type
@@ -29,6 +31,14 @@ public class Booking {
 
     public String getFareType() {
         return this.fareType;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public double getDurationRate() {
+        return durationRate;
     }
 
     public double getDistanceCost(){
