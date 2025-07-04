@@ -97,16 +97,16 @@ public class Main {
             sc.next();
         }else{
             System.out.println("--- Receipt ---");
-            System.out.printf("Ride Type: %s\n", booking.getId());
-            System.out.printf("Distance: %s km\n", booking.getId());
-            System.out.printf("Duration: %s mins\n", booking.getId());
-            System.out.printf("Total Fare: %s\n", booking.getId());
+            System.out.printf("Ride Type: %s\n", booking.getFareType());
+            System.out.printf("Distance: %s km\n", booking.getDistance());
+            System.out.printf("Duration: %s mins\n", booking.getDurationRate());
+            System.out.printf("Total Fare: %s\n", booking.getTotalFare());
             System.out.println("\nPress a key to continue.");
             sc.next();
         }
     }
     public static Booking searchBooking(ArrayList<Booking> bookings, String id){
-        return bookings.stream().filter(b -> b.getId().equals(id) ).findFirst().orElse(null);
+        return bookings.stream().filter(b -> b.getBookingId().equals(id) ).findFirst().orElse(null);
     }
 
     private static String generateId(){
