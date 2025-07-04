@@ -1,12 +1,15 @@
 package RideFareCalculator;
 
-public class NormalSurcharge implements Surcharge{
+public class RainSurcharge implements Surcharge{
+
     @Override
     public String getName(){
-        return "Normal";
+        return "Rain";
     }
+
     @Override
     public double computeSurchargeAmount(double baseFare){
-        return (baseFare * 0.1) + baseFare;
+        return (baseFare * 0.20) + baseFare;
     }
+
 }

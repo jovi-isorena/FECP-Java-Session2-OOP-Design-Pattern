@@ -1,12 +1,15 @@
 package RideFareCalculator;
 
-public class NormalSurcharge implements Surcharge{
+public class PeakHourSurcharge implements Surcharge{
+
     @Override
     public String getName(){
-        return "Normal";
+        return "Peak hours";
     }
+
     @Override
     public double computeSurchargeAmount(double baseFare){
-        return (baseFare * 0.1) + baseFare;
+        return (baseFare * 0.25) + baseFare;
     }
+
 }
