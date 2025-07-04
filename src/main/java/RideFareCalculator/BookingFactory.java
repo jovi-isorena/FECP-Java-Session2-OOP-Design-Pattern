@@ -3,10 +3,34 @@ package RideFareCalculator;
 public class BookingFactory {
 
     public static Booking createBooking(String bookingId, String vehicleType, double distance, double durationMins, String fareType) {
+        if (bookingId == null || bookingId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Booking ID cannot be null or empty");
+        }
+        if (vehicleType == null || vehicleType.trim().isEmpty()) {
+            throw new IllegalArgumentException("Vehicle type cannot be null or empty");
+        }
+        if (fareType == null || fareType.trim().isEmpty()) {
+            throw new IllegalArgumentException("Fare type cannot be null or empty");
+        }
+        if (distance < 0) {
+            throw new IllegalArgumentException("Distance cannot be negative");
+        }
+        if (durationMins < 0) {
+            throw new IllegalArgumentException("Duration cannot be negative");
+        }
+
+        Surcharge surcharge = switch (fareType.toLowerCase()) {
+            case "rain" -> new RainSurcharge();
+            case "peak" -> new PeakHourSurcharge();
+            case "night" -> new NightSurcharge();
+            case "normal" -> new NormalSurcharge();
+            default -> throw new IllegalArgumentException("Invalid fare type: " + fareType);
+        };
+
+        // Rates based on vehicle type
         double baseFare;
         double distanceRate;
         double durationRate;
-        Surcharge surcharge = new NormalSurcharge();
 
         switch (vehicleType.toLowerCase()) {
             case "standard":
@@ -22,9 +46,6 @@ public class BookingFactory {
             default:
                 throw new IllegalArgumentException("Invalid vehicle type: " + vehicleType);
         }
-
-        Booking booking = new Booking(baseFare, bookingId, vehicleType, distance, durationMins, durationRate, distanceRate, fareType, surcharge);
-
-        return booking;
+        return new Booking(baseFare, bookingId, vehicleType, distance, durationMins, durationRate, distanceRate, fareType, surcharge);
     }
 }
