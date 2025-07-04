@@ -5,7 +5,6 @@ public class Booking {
     private String vehicleType;
     private double baseFare; // base on vehicle type
 
-
     private double distance;
     private double durationMins;
     private double distanceRate; // base on vehicle type
@@ -33,7 +32,6 @@ public class Booking {
         return this.fareType;
     }
 
-
     public Surcharge getSurcharge() { return surcharge; }
 
     public double getDistance() {
@@ -44,6 +42,13 @@ public class Booking {
         return durationRate;
     }
 
+    public String getVehicleType(){
+        return this.vehicleType;
+    }
+
+    public double getBaseFare(){
+        return this.baseFare;
+    }
 
     public double getDistanceCost(){
         return this.distanceRate + this.distance;
@@ -54,6 +59,6 @@ public class Booking {
     }
 
     public double getTotalFare(){
-        return this.baseFare + getDistanceCost() + getDurationCost() + getDistanceCost() + 100; // surchange
+        return this.baseFare + getDistanceCost() + getDurationCost() + getDistanceCost() + surcharge.computeSurchargeAmount(); // surchange
     }
 }
