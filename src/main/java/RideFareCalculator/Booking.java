@@ -51,7 +51,7 @@ public class Booking {
     }
 
     public double getDistanceCost(){
-        return this.distanceRate + this.distance;
+        return this.distanceRate * this.distance;
     }
 
     public double getDurationCost(){
@@ -59,6 +59,6 @@ public class Booking {
     }
 
     public double getTotalFare(){
-        return this.baseFare + getDistanceCost() + getDurationCost() + getDistanceCost() + surcharge.computeSurchargeAmount(this.baseFare); // surchange
+        return this.baseFare + getDistanceCost() + getDurationCost() + surcharge.computeSurchargeAmount(this.baseFare); // surchange
     }
 }
