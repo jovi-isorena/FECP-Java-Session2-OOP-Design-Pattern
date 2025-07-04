@@ -31,8 +31,8 @@ public class BookingTest {
         Surcharge surcharge = new NormalSurcharge();
         Booking booking = new Booking(10, "B102", "standard", 8.0, 20.0, 2.0, 5.0, "normal", surcharge);
 
-        // distanceCost = distanceRate + distance = 5 + 8 = 13
-        assertEquals(13.0, booking.getDistanceCost(), 0.01);
+        // distanceCost = distanceRate * distance
+        assertEquals(40.0, booking.getDistanceCost(), 0.01);
     }
 
     @Test
@@ -46,9 +46,16 @@ public class BookingTest {
 
     @Test
     public void testTotalFareCalculation() {
-        Surcharge surcharge = new NormalSurcharge();
-        Booking booking = new Booking(10, "B104", "standard", 6.0, 10.0, 2.0, 4.0, "normal", surcharge);
-        assertEquals(51, booking.getTotalFare(), 0.01);
+        Surcharge surcharge = new NightSurcharge();
+        Booking booking = new Booking(10.0, "B104", "standard", 10.0, 60.0, 2.0, 5.0, "night", surcharge);
+        assertEquals(181.5, booking.getTotalFare(), 0.001);
+    }
+
+    @Test
+    public void testTotalFareCalculationPremium() {
+        Surcharge surcharge = new PeakHourSurcharge();
+        Booking booking = new Booking(20.0, "B104", "premium", 5.0, 90.0, 3.5, 8.0, "peak", surcharge);
+        assertEquals(380, booking.getTotalFare(), 0.001);
     }
 
     @Test
