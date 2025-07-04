@@ -17,7 +17,7 @@ class PeakHourSurchargeTest {
     @Test
     void returnsCorrectFareCalculation() {
         double actual = peakHourSurcharge.computeSurchargeAmount(50.0);
-        assertEquals(62.5, actual);
+        assertEquals(12.5, actual);
     }
 
     @Test

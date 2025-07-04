@@ -16,7 +16,7 @@ class NormalSurchargeTest {
     @Test
     void returnsCorrectFareCalculation() {
         double actual = normalSurcharge.computeSurchargeAmount(50.0);
-        assertEquals(55.0, actual);
+        assertEquals(5.0, actual);
     }
 
     @Test
