@@ -6,7 +6,7 @@
 
 
 * Lazaro, Cade Virgil C.
-* Isorena, Jovito Jr. E.
+* Isorena, Jovito Jr. B.
 * Tuan, Joshua Miguel R.
 
 
